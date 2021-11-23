@@ -1,6 +1,10 @@
 import React from 'react'
 const { width, height } = Dimensions.get('screen');
 import { View, Text, StyleSheet, TextInput, Image, Dimensions } from 'react-native'
+//React elements
+import { Button } from 'react-native-elements';
+
+
 export function SignIn(props) {
     return (
         <View style={styles.container}>
@@ -8,7 +12,7 @@ export function SignIn(props) {
                 <Image
                     source={require('../assets/icon.png')}
                 />
-                <Image                    
+                <Image
                     source={require('../assets/brand.png')}
                 />
             </View>
@@ -25,6 +29,19 @@ export function SignIn(props) {
                 //value={number}
                 placeholder="Password"
             />
+            <Button
+                title="Login"
+                buttonStyle={{ backgroundColor: 'black' }}
+                containerStyle = {{padding: 17}}
+            />
+            <Button
+                title="Forgot password?"
+                type="clear"
+            />
+            <Button
+                title="Privacy"    
+                type="clear"            
+            />
         </View>
     )
 }
@@ -34,12 +51,12 @@ const styles = StyleSheet.create({
         padding: 15,
         textAlign: 'center',
         marginBottom: 10,
-        width: '75%',
+
     },
     container: {
         flex: 1,
         backgroundColor: 'yellow',
-        
+
     },
     welcomeText: {
         fontSize: 24,
