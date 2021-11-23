@@ -6,9 +6,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SignUp } from './components/SignUp';
 import { SignIn } from './components/SignIn';
 import { Home } from './components/Home';
+//Firebase
+import { firebaseConfig } from './Config';
+import {initializeApp} from 'firebase/app'
 
 const Stack = createNativeStackNavigator();
-
+initializeApp(firebaseConfig)
 export default function App() {
   return (
     <NavigationContainer>
