@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,19 +8,47 @@ import { SignIn } from './components/SignIn';
 import { Home } from './components/Home';
 //Firebase
 import { firebaseConfig } from './Config';
-import {initializeApp} from 'firebase/app'
+import { initializeApp } from 'firebase/app'
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
 //colortheme 
 import { colortheme } from './colors';
 
 const Stack = createNativeStackNavigator();
-initializeApp(firebaseConfig)
+if (!initializeApp(firebaseConfig)){
+  initializeApp(firebaseConfig)
+}
+
 export default function App() {
+
+  const [auth, setAuth] = useState()
+  const SignupHandler = (email, password) => {
+    console.log("test");
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {``
+        // Signed in 
+        const user = userCredential.user;
+        setAuth(true)
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode + errorMessage);
+        // ..
+      });
+  }
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name = "SignUp" component ={SignUp} option = {{title: ""}}/>
-        <Stack.Screen name = "SignIn" component ={SignIn}/>
-        <Stack.Screen name = "Home" component ={Home}/>
+        <Stack.Screen name = "SignUp" >
+          { (props) => <SignUp handler = { () => SignupHandler} {...props} auth = {auth}/>}
+        </Stack.Screen>
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

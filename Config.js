@@ -1,9 +1,9 @@
-export const firebaseConfig = {
-    apiKey: "AIzaSyDVANvVPUfen8EYiw9yNirKACM9fe_b7bc",
-    authDomain: "my-app-1809b.firebaseapp.com",
-    projectId: "my-app-1809b",
-    storageBucket: "my-app-1809b.appspot.com",
-    messagingSenderId: "504587548004",
-    appId: "1:504587548004:web:fb46c277a008fcbdb77671",
-    measurementId: "G-T8J8TPH30H"
-  };
+export const  firebaseConfig = {
+  apiKey: "AIzaSyC-xR-hr-dpM2O75YkbAgt4KPOaEZNvibY",
+  authDomain: "newsproject-145a5.firebaseapp.com",
+  projectId: "newsproject-145a5",
+  storageBucket: "newsproject-145a5.appspot.com",
+  messagingSenderId: "855982679707",
+  appId: "1:855982679707:web:f4a3a6583118f6c9b3883e",
+  measurementId: "G-BT3J41VDHK"
+};
