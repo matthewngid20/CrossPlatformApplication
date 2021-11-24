@@ -21,15 +21,18 @@ if (!initializeApp(firebaseConfig)){
 export default function App() {
 
   const [auth, setAuth] = useState()
+  const [user, setUser] = useState()
+
   const SignupHandler = (email, password) => {
     console.log("test");
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {``
         // Signed in 
-        const user = userCredential.user;
+        const userCreated = userCredential.user;
         setAuth(true)
-        console.log(user);
+        setUser(ususerCreateder)
+        console.log(userCreated);
         // ...
       })
       .catch((error) => {
