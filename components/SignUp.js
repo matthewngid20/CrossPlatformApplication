@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/core'
 
 //React elements
 import { Button } from 'react-native-elements';
+//colortheme
+import { colortheme } from '../colors';
 
 export function  SignUp (props) {
     const navigation = useNavigation()
@@ -32,12 +34,13 @@ export function  SignUp (props) {
         />
         <Button
             title="Create your account"
-            buttonStyle={{ backgroundColor: 'black' }}
+            buttonStyle={{ backgroundColor: colortheme.blackish }}
             containerStyle = {{padding: 17}}
         />
         <Button
             title="Click here to login"
             onPress  = {() => navigation.navigate ("SignIn")}
+            
             type="clear"
             containerStyle = {{paddingBottom: 10}}
         />
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffdf3a',
+        backgroundColor: colortheme.yellowbg,
 
     },
     welcomeText: {

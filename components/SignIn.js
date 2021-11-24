@@ -3,6 +3,8 @@ const { width, height } = Dimensions.get('screen');
 import { View, Text, StyleSheet, TextInput, Image, Dimensions } from 'react-native'
 //React elements
 import { Button } from 'react-native-elements';
+//colortheme
+import { colortheme } from '../colors';
 
 
 export function SignIn(props) {
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffdf3a',
+        backgroundColor: colortheme.yellowbg,
 
     },
     welcomeText: {

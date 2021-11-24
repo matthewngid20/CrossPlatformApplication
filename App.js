@@ -9,6 +9,8 @@ import { Home } from './components/Home';
 //Firebase
 import { firebaseConfig } from './Config';
 import {initializeApp} from 'firebase/app'
+//colortheme 
+import { colortheme } from './colors';
 
 const Stack = createNativeStackNavigator();
 initializeApp(firebaseConfig)
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name = "SignUp" component ={SignUp}/>
+        <Stack.Screen name = "SignUp" component ={SignUp} option = {{title: ""}}/>
         <Stack.Screen name = "SignIn" component ={SignIn}/>
         <Stack.Screen name = "Home" component ={Home}/>
       </Stack.Navigator>
