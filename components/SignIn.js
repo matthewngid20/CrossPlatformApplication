@@ -11,6 +11,8 @@ import { colortheme } from '../colors';
 
 export function SignIn(props) {
     const navigation = useNavigation()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
 
     useEffect(() => {
         if(props.auth ===true) {navigation.reset({index: 0, routes: [{name: "Home"}]})}
@@ -31,6 +33,7 @@ export function SignIn(props) {
             <TextInput
                 style={styles.textInput}
                 placeholder="User name"
+                onChangeText = { (val) => setEmail(val)}
             />
             <Text> Password</Text>
             <TextInput
@@ -38,6 +41,7 @@ export function SignIn(props) {
                 //onChangeText={onChangeNumber}
                 //value={number}
                 placeholder="Password"
+                onChangeText = { (val) => setPassword(val)}
             />
             <Button
                 title="Login"
