@@ -31,7 +31,7 @@ export default function App() {
         // Signed in 
         const userCreated = userCredential.user;
         setAuth(true)
-        setUser(ususerCreateder)
+        setUser(userCreated)
         console.log(userCreated);
         // ...
       })
@@ -48,7 +48,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "SignUp" >
-          { (props) => <SignUp handler = { () => SignupHandler} {...props} auth = {auth}/>}
+          { (props) => <SignUp handler = { SignupHandler} {...props} auth = {auth}/>}
         </Stack.Screen>
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Home" component={Home} />

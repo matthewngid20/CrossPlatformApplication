@@ -11,18 +11,26 @@ export function  SignUp (props) {
     const [validEmail, setValidEmail] = useState(false)
     const [validPassword, setValidPassword] = useState(false)
     const [validForm, setValidForm] = useState(false)
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
     const navigation = useNavigation()
 
     const validateEmail = (emailVal) => {
-        if(emailVal.indexOf('@') > 0 ) setValidEmail(true)
-        return setValidEmail(false)
+        if(emailVal.indexOf('@') > 0 ) {setValidEmail(true)}
+        else{setValidEmail(false)}
+        setEmail(emailVal)
     }
 
     const validatePassword = (passwordVal) => {
-        if(passwordVal.length > 6){
+        if(passwordVal.length > 8){
             setValidPassword(true)
         }
         else{setValidPassword(false)}
+        setPassword(passwordVal)
+    }
+
+    const submitHandler = () => {
+        props.handler(email, password)
     }
 
     useEffect(() => {
@@ -31,7 +39,13 @@ export function  SignUp (props) {
         else {setValidForm(false)}
     }, [validPassword, validEmail])
     
+    console.log(validForm);
+
+    useEffect(() => {
+        if(props.auth ===true) {navigation.navigate('Home')}
+    }, [props.auth])
     return (
+        
         <View style={styles.container}>
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignContent: "center", alignItems: "center", marginTop: 64, justifyContent: "center" }}>
             <Image
@@ -46,20 +60,22 @@ export function  SignUp (props) {
         <TextInput
             style={styles.textInput}
             placeholder="User name"
-            onChangeText={(val) => setValidEmail(val)}
+            onChangeText={(val) => validateEmail(val)}
         />
         <Text> Password</Text>
         <TextInput
             style={styles.textInput}
-            onChangeText={(val) => setValidPassword(val)}
+            onChangeText={(val) => validatePassword(val)}
             //value={number}
             placeholder="Password"
+            secureTextEntry={true} 
         />
         <Button
             title="Create your account"
-            onPress = {props.SignUpHandler}
+            onPress = {() => submitHandler()}
             buttonStyle={{ backgroundColor: colortheme.blackish }}
             containerStyle = {{padding: 17}}
+            disabled = {(validForm)? false : true}
         />
         <Button
             title="Click here to login"
