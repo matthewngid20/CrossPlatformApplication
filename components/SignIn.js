@@ -1,13 +1,21 @@
 import React from 'react'
 const { width, height } = Dimensions.get('screen');
 import { View, Text, StyleSheet, TextInput, Image, Dimensions } from 'react-native'
+import { Feedback } from './Feedback';
 //React elements
 import { Button } from 'react-native-elements';
 //colortheme
 import { colortheme } from '../colors';
 
 
+
 export function SignIn(props) {
+    const navigation = useNavigation()
+
+    useEffect(() => {
+        if(props.auth ===true) {navigation.reset({index: 0, routes: [{name: "Home"}]})}
+    }, [props.auth])
+    
     return (
         <View style={styles.container}>
             <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignContent: "center", alignItems: "center", marginTop: 64, justifyContent: "center" }}>

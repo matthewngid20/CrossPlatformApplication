@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { View, Text, StyleSheet,Image,TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-
+import { Feedback } from './Feedback';
 //React elements
 import { Button } from 'react-native-elements';
 //colortheme
@@ -44,6 +44,7 @@ export function  SignUp (props) {
     useEffect(() => {
         if(props.auth ===true) {navigation.reset({index: 0, routes: [{name: "Home"}]})}
     }, [props.auth])
+    
     return (
         
         <View style={styles.container}>
@@ -77,10 +78,11 @@ export function  SignUp (props) {
             containerStyle = {{padding: 17}}
             disabled = {(validForm)? false : true}
         />
+        <Feedback message = {props.error}/>
+
         <Button
             title="Click here to login"
             onPress  = {() => navigation.navigate ("SignIn")}
-            
             type="clear"
             containerStyle = {{paddingBottom: 10}}
         />
