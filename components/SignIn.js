@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 const { width, height } = Dimensions.get('screen');
 import { View, Text, StyleSheet, TextInput, Image, Dimensions } from 'react-native'
 import { Feedback } from './Feedback';
@@ -47,6 +47,7 @@ export function SignIn(props) {
                 title="Login"
                 buttonStyle={{ backgroundColor: 'black' }}
                 containerStyle = {{padding: 17}}
+                onPress = { () => props.handler(email, password)}
             />
             <Button
                 title="Forgot password?"

@@ -19,7 +19,7 @@ if (!initializeApp(firebaseConfig)) {
   initializeApp(firebaseConfig)
 }
 
-export default function App() {
+export default function App(props) {
 
   const [auth, setAuth] = useState()
   const [user, setUser] = useState()
@@ -71,9 +71,18 @@ export default function App() {
       })
   }
 
+  const SignoutHandler = () => {
+    signOut(FBauth)
+      .then(() => {
+        setAuth(!auth)
+        setUser(null)
+      })
+      .catch((e) => console.log(e))
+  }
+
   console.log("auth state " + auth);
   return (
-    
+
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SignUp" >
@@ -89,9 +98,21 @@ export default function App() {
             handler={SigninHandler}
             error={signinError} />}
         </Stack.Screen>
-        <Stack.Screen name="Home" component={Home} />
-        {/* <Stack.Screen name="SignOut" component={SignOut} /> */}
+        <Stack.Screen
+          options={{
+            headerRight: (props) => (
+              <SignOut {...props} 
+              handler={SignoutHandler} 
+              user={user}
+              />
+            ),
+          }}
+          name="Home" >
+          {(props) => <Home {...props}
+            auth={auth}
 
+          />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

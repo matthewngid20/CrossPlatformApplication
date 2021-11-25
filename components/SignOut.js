@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 //React elements
 import { Button } from 'react-native-elements';
 import { colortheme } from '../colors';
 
-export function SignOut  ()  {
+export function SignOut  (props)  {
+    //const [auth, setAuth]= useState(props.auth)
     return (
-        
             <Button
                 title="Sign out"
-                //onPress
+                onPress={ () => props.handler() }
                 buttonStyle={{ backgroundColor: colortheme.blackish }}
-                containerStyle={{ padding: 17 }}
                 //disabled={(validForm) ? false : true}
             />
         
