@@ -42,7 +42,7 @@ export function  SignUp (props) {
     console.log(validForm);
 
     useEffect(() => {
-        if(props.auth ===true) {navigation.navigate('Home')}
+        if(props.auth ===true) {navigation.reset({index: 0, routes: [{name: "Home"}]})}
     }, [props.auth])
     return (
         
