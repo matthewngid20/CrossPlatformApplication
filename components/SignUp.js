@@ -61,6 +61,7 @@ export function  SignUp (props) {
         <TextInput
             style={styles.textInput}
             placeholder="User name"
+            autoCapitalize='none'
             onChangeText={(val) => validateEmail(val)}
         />
         <Text> Password</Text>
@@ -69,6 +70,7 @@ export function  SignUp (props) {
             onChangeText={(val) => validatePassword(val)}
             //value={number}
             placeholder="Password"
+            autoCapitalize='none'
             secureTextEntry={true} 
         />
         <Button

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 const { width, height } = Dimensions.get('screen');
 import { View, Text, StyleSheet, TextInput, Image, Dimensions } from 'react-native'
 import { Feedback } from './Feedback';
+import { useNavigation } from '@react-navigation/core'
 //React elements
 import { Button } from 'react-native-elements';
 //colortheme
@@ -33,6 +34,7 @@ export function SignIn(props) {
             <TextInput
                 style={styles.textInput}
                 placeholder="User name"
+                autoCapitalize='none'
                 onChangeText = { (val) => setEmail(val)}
             />
             <Text> Password</Text>
@@ -41,7 +43,9 @@ export function SignIn(props) {
                 //onChangeText={onChangeNumber}
                 //value={number}
                 placeholder="Password"
+                autoCapitalize='none'
                 onChangeText = { (val) => setPassword(val)}
+                secureTextEntry={true} 
             />
             <Button
                 title="Login"

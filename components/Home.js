@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native'
 //React elements
 import { Button } from 'react-native-elements';
 import { SignOut } from './SignOut';
+import { colortheme } from '../colors';
+
 
 
 export function Home(props) {
@@ -13,11 +15,16 @@ export function Home(props) {
         
     }, [])
     return (
-        <View>
+        <View style = {styles.container}>
             <Text>Home</Text>
         </View>
     )
 }
 
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colortheme.yellowbg,
+        flex: 1,
+    }
+})

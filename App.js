@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,12 +19,13 @@ if (!initializeApp(firebaseConfig)) {
 }
 
 export default function App(props) {
-
+  //const navigation = useNavigation()
   const [auth, setAuth] = useState()
   const [user, setUser] = useState()
   const [signupError, setSignupError] = useState()
   const [signinError, setSigninError] = useState()
   const FBauth = getAuth();
+  
 
   useEffect(() => {
     onAuthStateChanged(FBauth, (user) => {
@@ -67,7 +67,7 @@ export default function App(props) {
         setAuth(true)
       })
       .catch((e) => {
-        { setSigninError(error.code) }
+        { setSigninError(e.code) }
       })
   }
 
@@ -101,16 +101,15 @@ export default function App(props) {
         <Stack.Screen
           options={{
             headerRight: (props) => (
-              <SignOut {...props} 
-              handler={SignoutHandler} 
-              user={user}
+              <SignOut {...props}
+                handler={SignoutHandler}
+                user={user}
               />
             ),
           }}
           name="Home" >
           {(props) => <Home {...props}
             auth={auth}
-
           />}
         </Stack.Screen>
       </Stack.Navigator>
