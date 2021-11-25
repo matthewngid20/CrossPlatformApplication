@@ -12,6 +12,7 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
 //colortheme 
 import { colortheme } from './colors';
+import { SignOut } from './components/SignOut';
 
 const Stack = createNativeStackNavigator();
 if (!initializeApp(firebaseConfig)){
@@ -47,11 +48,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name = "SignUp" >
+        {/* <Stack.Screen name = "SignUp" >
           { (props) => <SignUp handler = { SignupHandler} {...props} auth = {auth}/>}
         </Stack.Screen>
         <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={Home} /> */}
+        <Stack.Screen name="SignOut" component={SignOut} /> 
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
