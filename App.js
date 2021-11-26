@@ -25,7 +25,7 @@ export default function App(props) {
   const [signupError, setSignupError] = useState()
   const [signinError, setSigninError] = useState()
   const FBauth = getAuth();
-  
+
 
   useEffect(() => {
     onAuthStateChanged(FBauth, (user) => {

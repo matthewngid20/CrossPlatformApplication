@@ -12,10 +12,10 @@ export function Home(props) {
     const navigation = useNavigation()
 
     useEffect(() => {
-        
-    }, [])
+        if(props.auth ===false) {navigation.reset({index: 0, routes: [{name: "SignIn"}]})}
+    }, [props.auth])
     return (
-        <View style = {styles.container}>
+        <View style={styles.container}>
             <Text>Home</Text>
         </View>
     )
