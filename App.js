@@ -9,6 +9,8 @@ import { Home } from './components/Home';
 import { firebaseConfig } from './Config';
 import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
+
 //colortheme 
 import { colortheme } from './colors';
 import { SignOut } from './components/SignOut';
@@ -17,6 +19,9 @@ const Stack = createNativeStackNavigator();
 if (!initializeApp(firebaseConfig)) {
   initializeApp(firebaseConfig)
 }
+
+const firestore = getFirestore();
+
 
 export default function App(props) {
   //const navigation = useNavigation()
@@ -44,7 +49,7 @@ export default function App(props) {
     console.log("test");
     createUserWithEmailAndPassword(FBauth, email, password)
       .then((userCredential) => {
-
+        createUser('users', { id: userCredential.user.uid, email: userCredential.user.email, level: 1 })
         // Signed in 
         const userCreated = userCredential.user;
         setUser(userCreated)
@@ -80,7 +85,11 @@ export default function App(props) {
       .catch((e) => console.log(e))
   }
 
-  console.log("auth state " + auth);
+  const createUser = async (collection, data) => {
+    console.log(data);
+    await setDoc(doc(firestore, collection, data.id), data);
+  }
+
   return (
 
     <NavigationContainer>
