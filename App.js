@@ -9,18 +9,29 @@ import { Home } from './components/Home';
 import { firebaseConfig } from './Config';
 import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import {
+  initializeFirestore,
+  getFirestore,
+  setDoc,
+  doc,
+  addDoc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+  getDoc
+} from 'firebase/firestore'
 
 //colortheme 
 import { colortheme } from './colors';
 import { SignOut } from './components/SignOut';
 
 const Stack = createNativeStackNavigator();
-if (!initializeApp(firebaseConfig)) {
-  initializeApp(firebaseConfig)
-}
 
-const firestore = getFirestore();
+const FBapp = initializeApp(firebaseConfig)
+const FSdb = initializeFirestore(FBapp, { useFetchStreams: false })
+const FBauth = getAuth()
+//const firestore = getFirestore();
 
 
 export default function App(props) {
@@ -29,14 +40,19 @@ export default function App(props) {
   const [user, setUser] = useState()
   const [signupError, setSignupError] = useState()
   const [signinError, setSigninError] = useState()
+  const [data, setData] = useState()
   const FBauth = getAuth();
 
+
+  // const usersRef = collection(firestore, "users");
+  // const newsRef = collection(firestore, "news");
 
   useEffect(() => {
     onAuthStateChanged(FBauth, (user) => {
       if (user) {
         setAuth(true)
         setUser(user)
+        if (!data) { getData() }
       }
       else {
         setAuth(false)
@@ -46,13 +62,11 @@ export default function App(props) {
   })
 
   const SignupHandler = (email, password) => {
-    console.log("test");
     createUserWithEmailAndPassword(FBauth, email, password)
       .then((userCredential) => {
-        createUser('users', { id: userCredential.user.uid, email: userCredential.user.email, level: 1 })
         // Signed in 
-        const userCreated = userCredential.user;
-        setUser(userCreated)
+        //const userCreated = userCredential.user;
+        setUser(userCredential.user)
         setAuth(true)
         // ...
       })
@@ -70,25 +84,62 @@ export default function App(props) {
       .then((userCredential) => {
         setUser(userCredential.user)
         setAuth(true)
-      })
-      .catch((e) => {
+
+      }).catch((e) => {
         { setSigninError(e.code) }
       })
   }
 
+
   const SignoutHandler = () => {
     signOut(FBauth)
       .then(() => {
-        setAuth(!auth)
+        setAuth(false)
         setUser(null)
       })
       .catch((e) => console.log(e))
   }
+  let array = ["Business"]
+  const addData = async (FScollection, data) => {
+    //adding data to a collection with automatic id
+    //const ref = await addDoc( collection(FSdb, FScollection ), data )
+    //const ref = await setDoc( doc( FSdb, `users/${user.uid}/documents/${ new Date().getTime() }`), data )
+    //console.log( ref.id )
 
-  const createUser = async (collection, data) => {
-    console.log(data);
-    await setDoc(doc(firestore, collection, data.id), data);
+    const newsRef = await setDoc(doc(FSdb, "News", `${user.uid}`),{
+      Title: "Title 1",
+			Content: "Content is",
+			Author_name: `${user.email}`
+    },data )
+    console.log(newsRef.id);
   }
+
+console.log(data);
+
+  const getData = async () => {
+    const docRef = doc(FSdb, "News",`${user.uid}`);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    // console.log('...getting data', user)
+    //const FSquery = query(collection(FSdb, News/s/documents))
+    // const unsubscribe = onSnapshot(FSquery, (querySnapshot) => {
+    //   let FSdata = []
+    //   querySnapshot.forEach((doc) => {
+    //     let item = {}
+    //     item = doc.data()
+    //     item.id = doc.id
+    //     FSdata.push(item)
+    //   })
+    //   setData(FSdata)
+    // })
+  }
+
 
   return (
 
@@ -117,9 +168,13 @@ export default function App(props) {
             ),
           }}
           name="Home" >
-          {(props) => <Home {...props}
-            auth={auth}
-          />}
+          {(props) =>
+            <Home {...props}
+              auth={auth}
+              data={data}
+              user={user}
+              addNews={addData}
+            />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

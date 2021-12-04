@@ -38,7 +38,7 @@ export function SignUp(props) {
         else { setValidForm(false) }
     }, [validPassword, validEmail])
 
-    console.log(validForm);
+    //console.log(validForm);
 
     useEffect(() => {
         if (props.auth === true) { navigation.reset({ index: 0, routes: [{ name: "Home" }] }) }
