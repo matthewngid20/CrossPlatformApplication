@@ -48,6 +48,7 @@ export default function App(props) {
   // const newsRef = collection(firestore, "news");
 
   useEffect(() => {
+    setUser(user)
     onAuthStateChanged(FBauth, (user) => {
       if (user) {
         setAuth(true)
@@ -59,8 +60,8 @@ export default function App(props) {
         setUser(null)
       }
     })
-  })
-
+  }, [data])
+  //console.log(user);
   const SignupHandler = (email, password) => {
     createUserWithEmailAndPassword(FBauth, email, password)
       .then((userCredential) => {
@@ -105,41 +106,43 @@ export default function App(props) {
     //const ref = await addDoc( collection(FSdb, FScollection ), data )
     //const ref = await setDoc( doc( FSdb, `users/${user.uid}/documents/${ new Date().getTime() }`), data )
     //console.log( ref.id )
-
-    const newsRef = await setDoc(doc(FSdb, "News", `${user.uid}`),{
+    const newsRef = await setDoc(doc(FSdb, "News", `${user.uid}`), {
       Title: "Title 1",
-			Content: "Content is",
-			Author_name: `${user.email}`
-    },data )
+      Content: "Content is",
+      Author_name: `${user.email}`
+    }, data)
     console.log(newsRef.id);
   }
 
-console.log(data);
 
   const getData = async () => {
-    const docRef = doc(FSdb, "News",`${user.uid}`);
+    const docRef = doc(FSdb, "News", `${user.uid}`);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-    // console.log('...getting data', user)
-    //const FSquery = query(collection(FSdb, News/s/documents))
-    // const unsubscribe = onSnapshot(FSquery, (querySnapshot) => {
+    // if (docSnap.exists()) {
+    //   //console.log("Document data:", docSnap.data());
     //   let FSdata = []
-    //   querySnapshot.forEach((doc) => {
-    //     let item = {}
-    //     item = doc.data()
-    //     item.id = doc.id
-    //     FSdata.push(item)
-    //   })
+    //   let item = {}
+    //   item = docSnap.data()
+    //   item.id = docSnap.id
+    //   FSdata.push(item)
     //   setData(FSdata)
-    // })
+    // } else {
+    //   console.log("No such document!");
+    // }
+    console.log('...getting data', user)
+    const FSquery = query(collection(FSdb, News/`${user.uid}`))
+    const unsubscribe = onSnapshot(FSquery, (querySnapshot) => {
+      let FSdata = []
+      querySnapshot.forEach((doc) => {
+        let item = {}
+        item = doc.data()
+        item.id = doc.id
+        FSdata.push(item)
+      })
+      setData(FSdata)
+    })
   }
-
 
   return (
 

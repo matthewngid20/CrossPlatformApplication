@@ -6,6 +6,7 @@ import { Button } from 'react-native-elements';
 import { SignOut } from './SignOut';
 import { colortheme } from '../colors';
 import { News } from './News';
+import SearchBar from './SearchBar';
 
 
 
@@ -18,16 +19,23 @@ export function Home(props) {
         setData(props.data)
     }, [props.auth, props.data])
 
+    useEffect(() => {
+        setData(props.data)
+    }, [props.data])
+
+    console.log(data);
 
     return (
         <View style={styles.container}>
-            <Text>Home</Text>
-            <Button 
+            <SearchBar/>
+            
+            {/* <Button 
             onPress = {() => props.addNews()}
             title = 'Add news'
             type = 'clear'
-            />
-            <News/>
+            /> */}
+            <News data = {data}/>
+            
         </View>
     )
 }
