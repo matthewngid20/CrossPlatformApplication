@@ -47,10 +47,10 @@ export function Home(props) {
             /> */}
             <FeatureNews item={{
                 id: '1',
-                title: 'This is the title no one.',
+                title: 'Christmas in the new time',
                 desc:
                     'Desc is the short form of description and this format is the actual same as our real database.',
-                thumbnail: 'https://assets.justinmind.com/wp-content/uploads/2018/11/Lorem-Ipsum-alternatives-768x492.png',
+                thumbnail: 'https://cdn.pixabay.com/photo/2019/12/19/10/56/christmas-market-4705885__340.jpg',
                 category: 'breaking-news',
             }} />
             <BreakingNews JSdata={breakingNews} />
