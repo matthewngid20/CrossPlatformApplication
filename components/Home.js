@@ -5,8 +5,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements';
 import { SignOut } from './SignOut';
 import { colortheme } from '../colors';
-import { News } from './News';
+import { BlockCard } from './BlockCard';
 import SearchBar from './SearchBar';
+import FeatureNews from './FeatureNews';
 
 
 
@@ -34,7 +35,7 @@ export function Home(props) {
             title = 'Add news'
             type = 'clear'
             /> */}
-            <News data = {data}/>
+            <FeatureNews />
             
         </View>
     )
