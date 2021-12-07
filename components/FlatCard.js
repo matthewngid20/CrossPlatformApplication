@@ -2,16 +2,16 @@ import React from 'react'
 import { Text, Image, View, StyleSheet } from 'react-native'
 import Subtitle from './Subtitle'
 import Title from './Title'
-export const BlockCard = ({ style, imageStyle, item }) => {
+export const FlatCard = ({ item }) => {
     //cconsole.log(props.data);
     const { thumbnail, title, desc } = item
     return (
-        <View style={[styles.container, style]}>
+        <View style={styles.container}>
             <Image
                 source={{ uri: thumbnail }}
-                style={[styles.image, imageStyle]}
+                style={styles.image}
             />
-            <View style={styles.contentContainer}>
+            <View style = {styles.contentContainer} >
                 <Title
                     numberOfLines={2}>{title}
                 </Title>
@@ -25,19 +25,20 @@ export const BlockCard = ({ style, imageStyle, item }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: 300,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
         borderRadius: 8,
         overflow: 'hidden',
-        backgroundColor: '#f3f3f7',
-        
+        marginBottom: 10,
+        height: 80,
     },
     image: {
-        width: '100%',
-        height: 200,
-
+        flex: 0.35,
+        height: "100%",
     },
     contentContainer: {
-        padding: 5,
+        flex: 0.65,
+        paddingHorizontal: 5, 
     }
 })
