@@ -68,7 +68,7 @@ export default [
       title: 'This is the title no nine.',
       desc:
         'Desc is the short form of description and this format is the actual same as our real database.',
-      thumbnail: 'http://lorempixel.com/400/200/',
+      thumbnail: 'https://cdn.pixabay.com/photo/2018/01/02/08/14/social-media-3055706__340.jpg',
       category: 'breaking-news',
       category: 'tech',
     },
