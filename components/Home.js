@@ -27,10 +27,6 @@ export function Home(props) {
     const[techNews, setTechNews] = useState([])
     const[entertainmentNews, setEntertainmentNews] = useState([])
 
-    // const breakingNews = JSdata.filter(item => item.category === 'breaking-news')
-    // const techNews = JSdata.filter(item => item.category === 'tech')
-    // const politicalNews = JSdata.filter(item => item.category === 'political')
-    // const entertainmentNews = JSdata.filter(item => item.category === 'entertainment')
     const filterFeaturedNews = (NewsData) => {
         return[...NewsData].filter(item => item.featured ==='on').reverse()[0]
     }
@@ -45,7 +41,8 @@ export function Home(props) {
    
     }
     const filterByAllCategory = (NewsData, category)=> {
-        return [...NewsData].filter(item => item.category === category)
+        const qty =3
+        return [...NewsData].filter(item => item.category === category).reverse().splice(0,qty)
     }
     useEffect(() => {
         if (props.auth === false) { navigation.reset({ index: 0, routes: [{ name: "SignIn" }] }) }
