@@ -16,6 +16,8 @@ import { FlatCard } from './FlatCard';
 import PoliticalNews from './PoliticalNews';
 import EntertainmentNews from './EntertainmentNews';
 import newsApi from '../api/newsApi'
+import NewsDetail from './NewsDetail';
+import NewsList from './NewsList';
 
 
 export function Home(props) {
@@ -40,9 +42,14 @@ export function Home(props) {
         setEntertainmentNews(filterByAllCategory(allNews, 'entertainment'))
 
     }
+    const qty = 3
     const filterByAllCategory = (NewsData, category) => {
-        const qty = 3
-        return [...NewsData].filter(item => item.category === category).reverse().splice(0, qty)
+        const result = [...NewsData].filter(item => item.category === category).reverse().splice(0, qty)
+        if (result.length) {
+            result.push({type:'viewMore', category: category, id:category})
+        }
+        console.log(result);
+        return result
     }
     useEffect(() => {
         if (props.auth === false) { navigation.reset({ index: 0, routes: [{ name: "SignIn" }] }) }
@@ -54,18 +61,17 @@ export function Home(props) {
         setData(props.data)
     }, [props.data])
 
-    console.log(data);
 
     return (
-        <ScrollView style={styles.container}>
-            <SearchBar />
-            <FeatureNews item={featuredNews} />
-            <BreakingNews JSdata={breakingNews} />
-            <PoliticalNews JSdata={politicalNews} />
-            <TechNews JSdata={techNews} />
-            <EntertainmentNews JSdata={entertainmentNews} />
-
-        </ScrollView>
+        // <ScrollView style={styles.container}>
+        //     <SearchBar />
+        //     <FeatureNews item={featuredNews} />
+        //     <BreakingNews JSdata={breakingNews} />
+        //     <PoliticalNews JSdata={politicalNews} />
+        //     <TechNews JSdata={techNews} />
+        //     <EntertainmentNews JSdata={entertainmentNews} />
+        // </ScrollView>
+        <NewsList/>
     )
 }
 

@@ -117,7 +117,6 @@ export default function App(props) {
   // }
 
   return (
-
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SignUp" >
