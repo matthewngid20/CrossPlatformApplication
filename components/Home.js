@@ -62,7 +62,7 @@ export function Home(props) {
     return (
         <ScrollView style={styles.container}>
             <SearchBar />
-            <FeatureNews item={{featuredNews}} />
+            <FeatureNews item={featuredNews} />
             <BreakingNews JSdata={breakingNews} />
             <PoliticalNews JSdata={politicalNews} />
             <TechNews JSdata={techNews} />

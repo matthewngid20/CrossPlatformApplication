@@ -44,7 +44,7 @@ export default function App(props) {
       if (user) {
         setAuth(true)
         setUser(user)
-        if (!data) { getData() }
+        // if (!data) { getData() }
       }
       else {
         setAuth(false)
@@ -98,23 +98,23 @@ export default function App(props) {
   }
 
 
-  const getData = async () => {
-    const docRef = doc(FSdb, "News", `${user.uid}`);
-    const docSnap = await getDoc(docRef);
+  // const getData = async () => {
+  //   const docRef = doc(FSdb, "News", `${user.uid}`);
+  //   const docSnap = await getDoc(docRef);
 
-    console.log('...getting data', user)
-    const FSquery = query(collection(FSdb, News / `${user.uid}`))
-    const unsubscribe = onSnapshot(FSquery, (querySnapshot) => {
-      let FSdata = []
-      querySnapshot.forEach((doc) => {
-        let item = {}
-        item = doc.data()
-        item.id = doc.id
-        FSdata.push(item)
-      })
-      setData(FSdata)
-    })
-  }
+  //   console.log('...getting data', user)
+  //   const FSquery = query(collection(FSdb, News / `${user.uid}`))
+  //   const unsubscribe = onSnapshot(FSquery, (querySnapshot) => {
+  //     let FSdata = []
+  //     querySnapshot.forEach((doc) => {
+  //       let item = {}
+  //       item = doc.data()
+  //       item.id = doc.id
+  //       FSdata.push(item)
+  //     })
+  //     setData(FSdata)
+  //   })
+  // }
 
   return (
 
