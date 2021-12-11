@@ -50,6 +50,7 @@ const searchPost = async query => {
   }
 };
 
+
 export default {
   getAll,
   getByCategory,

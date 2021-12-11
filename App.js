@@ -22,6 +22,7 @@ import {
 //colortheme 
 import { colortheme } from './colors';
 import { SignOut } from './components/SignOut';
+import AppNavigator from './components/AppNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -118,39 +119,7 @@ export default function App(props) {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="SignUp" >
-          {(props) => <SignUp {...props}
-            handler={SignupHandler}
-            auth={auth}
-            error={signupError}
-          />}
-        </Stack.Screen>
-        <Stack.Screen name="SignIn" >
-          {(props) => <SignIn {...props}
-            auth={auth}
-            handler={SigninHandler}
-            error={signinError} />}
-        </Stack.Screen>
-        <Stack.Screen
-          options={{
-            headerRight: (props) => (
-              <SignOut {...props}
-                handler={SignoutHandler}
-                user={user}
-              />
-            ),
-          }}
-          name="Home" >
-          {(props) =>
-            <Home {...props}
-              auth={auth}
-              data={data}
-              user={user}
-              addNews={addData}
-            />}
-        </Stack.Screen>
-      </Stack.Navigator>
+     <AppNavigator/>
     </NavigationContainer>
   );
 }

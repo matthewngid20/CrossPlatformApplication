@@ -48,7 +48,6 @@ export function Home(props) {
         if (result.length) {
             result.push({type:'viewMore', category: category, id:category})
         }
-        console.log(result);
         return result
     }
     useEffect(() => {
@@ -63,15 +62,15 @@ export function Home(props) {
 
 
     return (
-        // <ScrollView style={styles.container}>
-        //     <SearchBar />
-        //     <FeatureNews item={featuredNews} />
-        //     <BreakingNews JSdata={breakingNews} />
-        //     <PoliticalNews JSdata={politicalNews} />
-        //     <TechNews JSdata={techNews} />
-        //     <EntertainmentNews JSdata={entertainmentNews} />
-        // </ScrollView>
-        <NewsList/>
+        <ScrollView style={styles.container}>
+            <SearchBar />
+            <FeatureNews item={featuredNews} />
+            <BreakingNews JSdata={breakingNews} />
+            <PoliticalNews JSdata={politicalNews} />
+            <TechNews JSdata={techNews} />
+            <EntertainmentNews JSdata={entertainmentNews} />
+        </ScrollView>
+        //<NewsList/>
     )
 }
 

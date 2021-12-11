@@ -2,23 +2,26 @@ import React from 'react'
 import { Text, Image, View, StyleSheet } from 'react-native'
 import Subtitle from './Subtitle'
 import Title from './Title'
-export const BlockCard = ({ style, imageStyle, item }) => {
-    //cconsole.log(props.data);
+import { TouchableWithoutFeedback } from 'react-native'
+export const BlockCard = ({ style, imageStyle, item, onPress }) => {
+
     const { thumbnail, title, desc } = item
     return (
-        <View style={[styles.container, style]}>
-            <Image
-                source={{ uri: thumbnail }}
-                style={[styles.image, imageStyle]}
-            />
-            <View style={styles.contentContainer}>
-                <Title
-                    numberOfLines={2}>{title}
-                </Title>
-                <Subtitle numberOfLines={2}>{desc}
-                </Subtitle>
+        <TouchableWithoutFeedback onPress={onPress}>
+            <View style={[styles.container, style]}>
+                <Image
+                    source={{ uri: thumbnail }}
+                    style={[styles.image, imageStyle]}
+                />
+                <View style={styles.contentContainer}>
+                    <Title
+                        numberOfLines={2}>{title}
+                    </Title>
+                    <Subtitle numberOfLines={2}>{desc}
+                    </Subtitle>
+                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 

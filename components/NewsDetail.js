@@ -2,7 +2,8 @@ import React from 'react'
 import { Image, ScrollView, StyleSheet, Text, View, Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
-const NewsDetail = () => {
+const NewsDetail = (props) => {
+    console.log(props.route.params.item);
     return (
         <ScrollView style={styles.container}>
             <Image style={styles.image}
