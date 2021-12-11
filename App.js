@@ -11,13 +11,10 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
 import {
   initializeFirestore,
-  getFirestore,
   setDoc,
   doc,
-  addDoc,
   collection,
   query,
-  where,
   onSnapshot,
   getDoc
 } from 'firebase/firestore'
@@ -31,21 +28,15 @@ const Stack = createNativeStackNavigator();
 const FBapp = initializeApp(firebaseConfig)
 const FSdb = initializeFirestore(FBapp, { useFetchStreams: false })
 const FBauth = getAuth()
-//const firestore = getFirestore();
 
 
 export default function App(props) {
-  //const navigation = useNavigation()
   const [auth, setAuth] = useState()
   const [user, setUser] = useState()
   const [signupError, setSignupError] = useState()
   const [signinError, setSigninError] = useState()
   const [data, setData] = useState()
   const FBauth = getAuth();
-
-
-  // const usersRef = collection(firestore, "users");
-  // const newsRef = collection(firestore, "news");
 
   useEffect(() => {
     setUser(user)
@@ -61,15 +52,11 @@ export default function App(props) {
       }
     })
   }, [data])
-  //console.log(user);
   const SignupHandler = (email, password) => {
     createUserWithEmailAndPassword(FBauth, email, password)
       .then((userCredential) => {
-        // Signed in 
-        //const userCreated = userCredential.user;
         setUser(userCredential.user)
         setAuth(true)
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -102,10 +89,6 @@ export default function App(props) {
   }
   let array = ["Business"]
   const addData = async (FScollection, data) => {
-    //adding data to a collection with automatic id
-    //const ref = await addDoc( collection(FSdb, FScollection ), data )
-    //const ref = await setDoc( doc( FSdb, `users/${user.uid}/documents/${ new Date().getTime() }`), data )
-    //console.log( ref.id )
     const newsRef = await setDoc(doc(FSdb, "News", `${user.uid}`), {
       Title: "Title 1",
       Content: "Content is",
@@ -119,19 +102,8 @@ export default function App(props) {
     const docRef = doc(FSdb, "News", `${user.uid}`);
     const docSnap = await getDoc(docRef);
 
-    // if (docSnap.exists()) {
-    //   //console.log("Document data:", docSnap.data());
-    //   let FSdata = []
-    //   let item = {}
-    //   item = docSnap.data()
-    //   item.id = docSnap.id
-    //   FSdata.push(item)
-    //   setData(FSdata)
-    // } else {
-    //   console.log("No such document!");
-    // }
     console.log('...getting data', user)
-    const FSquery = query(collection(FSdb, News/`${user.uid}`))
+    const FSquery = query(collection(FSdb, News / `${user.uid}`))
     const unsubscribe = onSnapshot(FSquery, (querySnapshot) => {
       let FSdata = []
       querySnapshot.forEach((doc) => {

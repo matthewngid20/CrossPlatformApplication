@@ -10,24 +10,47 @@ import SearchBar from './SearchBar';
 import FeatureNews from './FeatureNews';
 import SmallCard from './SmallCard';
 import BreakingNews from './BreakingNews';
-import JSdata from '../data'
+//import JSdata from '../data'
 import TechNews from './TechNew';
 import { FlatCard } from './FlatCard';
 import PoliticalNews from './PoliticalNews';
 import EntertainmentNews from './EntertainmentNews';
+import newsApi from '../api/newsApi'
 
 
 export function Home(props) {
     const navigation = useNavigation()
     const [data, setData] = useState()
+    const[featuredNews, setFeaturedNews] = useState({})
+    const[breakingNews, setBreakingNews] = useState([])
+    const[politicalNews, setPoliticalNews] = useState([])
+    const[techNews, setTechNews] = useState([])
+    const[entertainmentNews, setEntertainmentNews] = useState([])
 
-    const breakingNews = JSdata.filter(item => item.category === 'breaking-news')
-    const techNews = JSdata.filter(item => item.category === 'tech')
-    const politicalNews = JSdata.filter(item => item.category === 'political')
-    const entertainmentNews = JSdata.filter(item => item.category === 'entertainment')
+    // const breakingNews = JSdata.filter(item => item.category === 'breaking-news')
+    // const techNews = JSdata.filter(item => item.category === 'tech')
+    // const politicalNews = JSdata.filter(item => item.category === 'political')
+    // const entertainmentNews = JSdata.filter(item => item.category === 'entertainment')
+    const filterFeaturedNews = (NewsData) => {
+        return[...NewsData].filter(item => item.featured ==='on').reverse()[0]
+    }
+    const filterMultipleNews = async ()=> {
+        const allNews = await newsApi.getAll()
+        setFeaturedNews(filterFeaturedNews(allNews))
+
+        setBreakingNews(filterByAllCategory(allNews, 'breaking-news'))
+        setPoliticalNews(filterByAllCategory(allNews, 'political'))
+        setTechNews(filterByAllCategory(allNews, 'tech'))
+        setEntertainmentNews(filterByAllCategory(allNews, 'entertainment'))
+   
+    }
+    const filterByAllCategory = (NewsData, category)=> {
+        return [...NewsData].filter(item => item.category === category)
+    }
     useEffect(() => {
         if (props.auth === false) { navigation.reset({ index: 0, routes: [{ name: "SignIn" }] }) }
         setData(props.data)
+        filterMultipleNews()
     }, [props.auth, props.data])
 
     useEffect(() => {
@@ -39,24 +62,11 @@ export function Home(props) {
     return (
         <ScrollView style={styles.container}>
             <SearchBar />
-
-            {/* <Button 
-            onPress = {() => props.addNews()}
-            title = 'Add news'
-            type = 'clear'
-            /> */}
-            <FeatureNews item={{
-                id: '1',
-                title: 'Christmas in the new time',
-                desc:
-                    'Desc is the short form of description and this format is the actual same as our real database.',
-                thumbnail: 'https://cdn.pixabay.com/photo/2019/12/19/10/56/christmas-market-4705885__340.jpg',
-                category: 'breaking-news',
-            }} />
+            <FeatureNews item={{featuredNews}} />
             <BreakingNews JSdata={breakingNews} />
             <PoliticalNews JSdata={politicalNews} />
             <TechNews JSdata={techNews} />
-            <EntertainmentNews JSdata={entertainmentNews}/>
+            <EntertainmentNews JSdata={entertainmentNews} />
 
         </ScrollView>
     )
