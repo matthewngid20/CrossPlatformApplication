@@ -13,7 +13,7 @@ const getAll = async () => {
   }
 };
 
-const getSingle = async id => {
+const getSingle = async (id) => {
   try {
     const response = await apiClient.get(`/news/single/${id}`);
 
@@ -49,7 +49,6 @@ const searchPost = async query => {
     console.log('Error while searching - searchPost newsAPi', error);
   }
 };
-
 
 export default {
   getAll,

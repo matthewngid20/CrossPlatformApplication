@@ -1,16 +1,28 @@
-import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, View, Dimensions } from 'react-native'
-
+import React,{useState, useEffect} from 'react'
+import {  Image, ScrollView, StyleSheet, Text, View, Dimensions } from 'react-native'
+import newsApi from '../api/newsApi'
 const { width, height } = Dimensions.get('window')
-const NewsDetail = (props) => {
-    console.log(props.route.params.item);
+const NewsDetail = ({ route }) => {
+    const [news, setNews] = useState({})
+    const { id: postId, category: postCategory } = route.params.item
+    console.log(route.params.item);
+
+    const fetchPost = async (id) => {
+        const result = await newsApi.getSingle(id)
+        console.log(result);
+        setNews(result)
+    }
+    useEffect(() => {
+        fetchPost(postId)
+    }, [])
+    const { title, content, thumbnail } = news;
     return (
         <ScrollView style={styles.container}>
             <Image style={styles.image}
-                source={require('../assets/youth.jpeg')} />
+                source={{uri: thumbnail}} />
             <View style={styles.contentContainer}>
-                <Text style={styles.title}>This is the title </Text>
-                <Text style={styles.content}> "Brisbane, Australia (CNN Business)An Australian Senate committee on Thursday issued a scathing indictment of media mogul Rupert Murdoch's News Corp, calling it the country's \"clearest example of a troubling media monopoly.\"\r\n\r\nBut the committee stopped short of calling on News Corp to dilute or otherwise cede any of its Australian interests, and instead made a number of recommendations — including the creation of a judicial inquiry into media diversity, ownership and regulation.</Text>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.content}> {content}</Text>
             </View>
         </ScrollView>
     )
@@ -27,12 +39,12 @@ const styles = StyleSheet.create({
     contentContainer: {
         padding: 10
     },
-    title:{
-        fontSize:18,
-        fontWeight:'bold',
-        marginBottom:10
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10
     },
-    content:{
+    content: {
         fontSize: 16,
         color: '#4e4d4d'
     }
