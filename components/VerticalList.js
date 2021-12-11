@@ -10,9 +10,9 @@ const VerticalList = ({ title, JSdata }) => {
     const navigation = useNavigation()
     return (
         <View >
-            <Title size={20}>
+            {title && <Title size={20}>
                 {title}
-            </Title>
+            </Title>}
             <View style={styles.container}>
                 {JSdata.map(item => <VerticalCard 
                 item={item} 

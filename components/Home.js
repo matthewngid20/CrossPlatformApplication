@@ -47,6 +47,7 @@ export function Home(props) {
         const result = [...NewsData].filter(item => item.category === category).reverse().splice(0, qty)
         if (result.length) {
             result.push({type:'viewMore', category: category, id:category})
+            //console.log(result);
         }
         return result
     }

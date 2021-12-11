@@ -2,11 +2,19 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { FlatCard } from './FlatCard'
 import ViewMore from './ViewMore'
+import { useNavigation } from '@react-navigation/native'
+import newsApi from '../api/newsApi'
+
 
 const VerticalCard = ({ item, onPress }) => {
-
+    const navigation = useNavigation()
+    const handleMore = async (category) => {
+        const result = await newsApi.getByCategory(category)
+        navigation.navigate('NewsList', result)
+    }
+    
     if (item.type === 'viewMore') {
-        return <ViewMore />
+        return <ViewMore onPress = {() => handleMore(item.category)}/>
     }
     return (
         <FlatCard item={item}

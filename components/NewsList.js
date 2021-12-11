@@ -1,11 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View,StatusBar } from 'react-native'
-
-const NewsList = () => {
+import { StyleSheet, Text, View, StatusBar, ScrollView } from 'react-native'
+import VerticalList from './VerticalList'
+const NewsList = ({ route }) => {
+    const data = route.params
+    const header = data[0].category.split('-').join(' ').toUpperCase()
     return (
-        <View style={styles.headerContainer}>
-            <Text style={styles.categoryTitle}>Category</Text>
-        </View>
+        <>
+            <View style={styles.headerContainer}>
+                <Text style={styles.categoryTitle}>{header}</Text>
+            </View>
+            <ScrollView contentContainerStyle ={{padding: 15}}>
+                <VerticalList JSdata={ data}/>
+            </ScrollView>
+        </>
     )
 }
 
@@ -20,7 +27,7 @@ const styles = StyleSheet.create({
         marginTop: StatusBar.currentHeight,
         backgroundColor: '#4e4d4d'
     },
-    categoryTitle:{
+    categoryTitle: {
         fontSize: 20,
         fontWeight: 'bold',
         textTransform: 'uppercase',
