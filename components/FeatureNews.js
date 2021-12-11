@@ -4,7 +4,7 @@ import { BlockCard } from './BlockCard'
 
 const FeatureNews = ({ item }) => {
     return (
-        <BlockCard item={item} style={{ marginVertical: 15,  }} />
+        <BlockCard item={item} style={{ marginVertical: 15, }} />
     )
 }
 

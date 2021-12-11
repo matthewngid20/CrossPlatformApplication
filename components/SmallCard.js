@@ -3,13 +3,13 @@ import { StyleSheet, Dimensions } from 'react-native'
 import { BlockCard } from './BlockCard'
 
 const { width } = Dimensions.get('window')
-const SmallCard = ({item}) => {
+const SmallCard = ({ item }) => {
 
 
     return (
-        <BlockCard item ={item}
+        <BlockCard item={item}
             style={styles.container}
-            imageStyle = {styles.image} />
+            imageStyle={styles.image} />
     )
 }
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         marginLeft: 15,
         height: 200,
-        
+
     },
     image: {
         height: 100,

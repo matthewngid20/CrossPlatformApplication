@@ -11,7 +11,7 @@ export const FlatCard = ({ item }) => {
                 source={{ uri: thumbnail }}
                 style={styles.image}
             />
-            <View style = {styles.contentContainer} >
+            <View style={styles.contentContainer} >
                 <Title
                     numberOfLines={2}>{title}
                 </Title>
@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 0.65,
-        paddingHorizontal: 5, 
+        paddingHorizontal: 5,
     }
 })

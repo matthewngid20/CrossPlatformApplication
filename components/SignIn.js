@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         textAlign: 'center',
-        margin:2,
+        margin: 2,
         marginRight: 17,
         marginLeft: 17,
         //color: 'white',
@@ -92,9 +92,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 37,
-    }, 
+    },
     label: {
-        marginLeft:12,
+        marginLeft: 12,
         fontSize: 17,
     }
 })

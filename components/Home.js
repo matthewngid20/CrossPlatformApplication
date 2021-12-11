@@ -21,16 +21,16 @@ import newsApi from '../api/newsApi'
 export function Home(props) {
     const navigation = useNavigation()
     const [data, setData] = useState()
-    const[featuredNews, setFeaturedNews] = useState({})
-    const[breakingNews, setBreakingNews] = useState([])
-    const[politicalNews, setPoliticalNews] = useState([])
-    const[techNews, setTechNews] = useState([])
-    const[entertainmentNews, setEntertainmentNews] = useState([])
+    const [featuredNews, setFeaturedNews] = useState({})
+    const [breakingNews, setBreakingNews] = useState([])
+    const [politicalNews, setPoliticalNews] = useState([])
+    const [techNews, setTechNews] = useState([])
+    const [entertainmentNews, setEntertainmentNews] = useState([])
 
     const filterFeaturedNews = (NewsData) => {
-        return[...NewsData].filter(item => item.featured ==='on').reverse()[0]
+        return [...NewsData].filter(item => item.featured === 'on').reverse()[0]
     }
-    const filterMultipleNews = async ()=> {
+    const filterMultipleNews = async () => {
         const allNews = await newsApi.getAll()
         setFeaturedNews(filterFeaturedNews(allNews))
 
@@ -38,11 +38,11 @@ export function Home(props) {
         setPoliticalNews(filterByAllCategory(allNews, 'political'))
         setTechNews(filterByAllCategory(allNews, 'tech'))
         setEntertainmentNews(filterByAllCategory(allNews, 'entertainment'))
-   
+
     }
-    const filterByAllCategory = (NewsData, category)=> {
-        const qty =3
-        return [...NewsData].filter(item => item.category === category).reverse().splice(0,qty)
+    const filterByAllCategory = (NewsData, category) => {
+        const qty = 3
+        return [...NewsData].filter(item => item.category === category).reverse().splice(0, qty)
     }
     useEffect(() => {
         if (props.auth === false) { navigation.reset({ index: 0, routes: [{ name: "SignIn" }] }) }
@@ -68,7 +68,6 @@ export function Home(props) {
         </ScrollView>
     )
 }
-
 
 const styles = StyleSheet.create({
     container: {
