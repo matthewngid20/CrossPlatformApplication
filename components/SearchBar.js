@@ -17,12 +17,13 @@ export default SearchBar
 
 const styles = StyleSheet.create({
     container: {
+        
         width: "100%",
         height: 50,
         backgroundColor: 'white',
         justifyContent: 'center',
         paddingLeft: 15,
-        //marginTop: 10
+        marginTop: 50,
         borderRadius: 15
     },
     searchText: {

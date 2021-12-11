@@ -4,13 +4,15 @@ import { BlockCard } from './BlockCard'
 import ViewMore from './ViewMore'
 
 const { width } = Dimensions.get('window')
-const SmallCard = ({ item }) => {
+const SmallCard = ({ item, onPress }) => {
     if (item.type === 'viewMore') {
         return <ViewMore style={styles.viewMore} />
     }
 
     return (
-        <BlockCard item={item}
+        <BlockCard
+            onPress={onPress}
+            item={item}
             style={styles.container}
             imageStyle={styles.image} />
     )
