@@ -16,7 +16,7 @@ const HorizontalList = ({ title, JSdata }) => {
                     keyExtractor={item => item.id}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => <SmallCard onPress ={() => navigation.navigate('NewsDetail',{item}) } item={item} />}
+                    renderItem={({ item }) => <SmallCard onPress ={() => navigation.push('NewsDetail',{item}) } item={item} />}
                 />
             </View>
         </>

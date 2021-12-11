@@ -1,11 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,TouchableWithoutFeedback } from 'react-native'
 
-const ViewMore = ({style}) => {
+const ViewMore = ({style, onPress}) => {
     return (
-        <View style = {[styles.container,style]}>
-            <Text>View More</Text>
-        </View>
+        <TouchableWithoutFeedback onPress ={onPress}>
+            <View style = {[styles.container,style]}>
+                <Text>View More</Text>
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 

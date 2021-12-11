@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from 'react-native'
 import { FlatCard } from './FlatCard'
 import ViewMore from './ViewMore'
 
-const VerticalCard = ({ item }) => {
+const VerticalCard = ({ item, onPress }) => {
 
     if (item.type === 'viewMore') {
         return <ViewMore />
     }
     return (
-        <FlatCard item={item} />
+        <FlatCard item={item}
+            onPress={onPress} />
     )
 }
 

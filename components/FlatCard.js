@@ -1,24 +1,26 @@
 import React from 'react'
-import { Text, Image, View, StyleSheet } from 'react-native'
+import { Text, Image, View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import Subtitle from './Subtitle'
 import Title from './Title'
-export const FlatCard = ({ item }) => {
+export const FlatCard = ({ item, onPress }) => {
     //cconsole.log(props.data);
     const { thumbnail, title, desc } = item
     return (
-        <View style={styles.container}>
-            <Image
-                source={{ uri: thumbnail }}
-                style={styles.image}
-            />
-            <View style={styles.contentContainer} >
-                <Title
-                    numberOfLines={2}>{title}
-                </Title>
-                <Subtitle numberOfLines={2}>{desc}
-                </Subtitle>
+        <TouchableWithoutFeedback onPress={ onPress}>
+            <View style={styles.container}>
+                <Image
+                    source={{ uri: thumbnail }}
+                    style={styles.image}
+                />
+                <View style={styles.contentContainer} >
+                    <Title
+                        numberOfLines={2}>{title}
+                    </Title>
+                    <Subtitle numberOfLines={2}>{desc}
+                    </Subtitle>
+                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 
