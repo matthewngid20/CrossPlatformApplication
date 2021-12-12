@@ -14,7 +14,8 @@ const SmallCard = ({ item, onPress }) => {
         navigation.navigate('NewsList', result)
     }
     if (item.type === 'viewMore') {
-        return <ViewMore style={styles.viewMore} onPress={() => handleMore(item.category)} />
+        return <ViewMore style={styles.viewMore}
+            onPress={() => handleMore(item.category)} />
     }
 
     return (

@@ -1,5 +1,4 @@
 import React from 'react'
-import { View, Text } from 'react-native'
 import { BlockCard } from './BlockCard'
 import { useNavigation } from '@react-navigation/native'
 

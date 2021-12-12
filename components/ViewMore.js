@@ -5,7 +5,7 @@ const ViewMore = ({style, onPress}) => {
     return (
         <TouchableWithoutFeedback onPress ={onPress}>
             <View style = {[styles.container,style]}>
-                <Text>View More</Text>
+                <Text style = {styles.text}>View More</Text>
             </View>
         </TouchableWithoutFeedback>
     )
@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         width: '100%',
         height: 50,
-        backgroundColor:'white'
+        backgroundColor:'black'
     },
     text: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#7a74e0'
+        color: 'white'
     }
 })

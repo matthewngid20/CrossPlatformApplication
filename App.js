@@ -68,16 +68,6 @@ export default function App(props) {
       });
   }
 
-  const SigninHandler = (email, password) => {
-    signInWithEmailAndPassword(FBauth, email, password)
-      .then((userCredential) => {
-        setUser(userCredential.user)
-        setAuth(true)
-
-      }).catch((e) => {
-        { setSigninError(e.code) }
-      })
-  }
 
 
   const SignoutHandler = () => {

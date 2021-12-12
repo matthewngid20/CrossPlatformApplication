@@ -8,7 +8,7 @@ const NewsDetail = ({ route }) => {
     const [news, setNews] = useState({})
     const [relatedNews, setRelatedNews] = useState({})
     const { id: postId, category: postCategory } = route.params.item
-    console.log(route.params.item);
+
 
     const fetchPost = async (id) => {
         const result = await newsApi.getSingle(id)

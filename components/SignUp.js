@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput,Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { Feedback } from './Feedback';
 //React elements
 import { Button } from 'react-native-elements';
 //colortheme
 import { colortheme } from '../colors';
+import { initializeApp } from 'firebase/app'
+import {firebaseConfig} from '../Config'
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
+
+const FBapp = initializeApp(firebaseConfig)
+const FBauth = getAuth()
 
 export function SignUp(props) {
     const [validEmail, setValidEmail] = useState(false)
     const [validPassword, setValidPassword] = useState(false)
     const [validForm, setValidForm] = useState(false)
     const [email, setEmail] = useState()
+    const [user, setUser] = useState()
     const [password, setPassword] = useState()
     const navigation = useNavigation()
 
@@ -29,19 +36,31 @@ export function SignUp(props) {
         setPassword(passwordVal)
     }
 
-    const submitHandler = () => {
-        props.handler(email, password)
-    }
-
+    const SignupHandler = (email, password) => {
+        createUserWithEmailAndPassword(FBauth, email, password)
+          .then((userCredential) => {
+            setUser(userCredential.user)
+            //setAuth(true)
+            const message = "Registered Successfully"
+            Alert.alert(message)
+            navigation.reset({ index: 0, routes: [{ name: "home" }] })
+          })
+          .catch((error) => {
+              console.log(error);
+            const errorCode = error.code;
+            const message = errorCode.split('/').pop()
+            Alert.alert(message.split('-').join(' '))
+          });
+      }
+    
     useEffect(() => {
         if (validEmail && validPassword) { setValidForm(true) }
         else { setValidForm(false) }
     }, [validPassword, validEmail])
 
-    //console.log(validForm);
 
     useEffect(() => {
-        if (props.auth === true) { navigation.reset({ index: 0, routes: [{ name: "Home" }] }) }
+        if (props.auth === true) { navigation.reset({ index: 0, routes: [{ name: "home" }] }) }
     }, [props.auth])
 
     return (
@@ -67,14 +86,13 @@ export function SignUp(props) {
             <TextInput
                 style={styles.textInput}
                 onChangeText={(val) => validatePassword(val)}
-                //value={number}
                 placeholder="Password"
                 autoCapitalize='none'
                 secureTextEntry={true}
             />
             <Button
                 title="Create your account"
-                onPress={() => submitHandler()}
+                onPress={() => SignupHandler(email,password)}
                 buttonStyle={{ backgroundColor: colortheme.blackish }}
                 containerStyle={{ padding: 17 }}
                 disabled={(validForm) ? false : true}

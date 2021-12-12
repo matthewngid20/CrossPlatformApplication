@@ -1,9 +1,8 @@
 import React from 'react'
-import { Text, Image, View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { Image, View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import Subtitle from './Subtitle'
 import Title from './Title'
 export const FlatCard = ({ item, onPress }) => {
-    //cconsole.log(props.data);
     const { thumbnail, title, desc } = item
     return (
         <TouchableWithoutFeedback onPress={ onPress}>

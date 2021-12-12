@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import SmallCard from './SmallCard'
 import Title from './Title'
 import { useNavigation } from '@react-navigation/native'

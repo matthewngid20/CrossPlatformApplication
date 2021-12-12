@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { View, } from 'react-native'
+import React from 'react'
+import { View, StyleSheet} from 'react-native'
+import { useNavigation } from '@react-navigation/core'
 //React elements
-import { Button } from 'react-native-elements';
+import { Button, } from 'react-native-elements';
 
 
 export function SignOut(props) {
-    //const [auth, setAuth]= useState(props.auth)
-
+    const navigation = useNavigation()
     return (
-        <View>
+        <View style={styles.container}>
             <Button
                 title="Sign out"
-                onPress={() => { props.handler() }}
+                onPress={() => { navigation.reset({ index: 0, routes: [{ name: "SignIn" }] }) }}
                 buttonStyle={{ backgroundColor: 'red' }}
-            //disabled={(validForm) ? false : true}
             />
         </View>
 
     )
 }
-
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 77,
+        width: 100,      
+        flexDirection: 'row',
+        marginLeft: 'auto'
+    }
+})

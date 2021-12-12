@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react'
 const { width, height } = Dimensions.get('screen');
 import { View, Text, StyleSheet, TextInput, Image, Dimensions } from 'react-native'
-import { Feedback } from './Feedback';
 import { useNavigation } from '@react-navigation/core'
 //React elements
 import { Button } from 'react-native-elements';
 //colortheme
 import { colortheme } from '../colors';
+import { initializeApp } from 'firebase/app'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import {firebaseConfig} from '../Config'
 
-
-
+const FBapp = initializeApp(firebaseConfig)
+const FBauth = getAuth()
 export function SignIn(props) {
+    const [auth, setAuth] = useState()
     const navigation = useNavigation()
     const [email, setEmail] = useState()
+    const [user, setUser] = useState()
     const [password, setPassword] = useState()
 
-    useEffect(() => {
-        if (props.auth === true) { navigation.reset({ index: 0, routes: [{ name: "Home" }] }) }
-    }, [props.auth])
-
+    const SigninHandler = (email, password) => {
+        signInWithEmailAndPassword(FBauth, email, password)
+          .then((userCredential) => {
+            setUser(userCredential.user)
+            setAuth(true)
+            navigation.reset({ index: 0, routes: [{ name: "home" }] })
+          }).catch((e) => {
+            console.log(e);
+          })
+      }
     return (
         <View style={styles.container}>
             <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignContent: "center", alignItems: "center", marginTop: 64, justifyContent: "center" }}>
@@ -40,8 +50,6 @@ export function SignIn(props) {
             <Text style={styles.label}> Password</Text>
             <TextInput
                 style={styles.textInput}
-                //onChangeText={onChangeNumber}
-                //value={number}
                 placeholder="Password"
                 autoCapitalize='none'
                 onChangeText={(val) => setPassword(val)}
@@ -51,7 +59,7 @@ export function SignIn(props) {
                 title="Login"
                 buttonStyle={{ backgroundColor: 'black' }}
                 containerStyle={{ padding: 17 }}
-                onPress={() => props.handler(email, password)}
+                onPress={() => SigninHandler(email, password)}
             />
             <Button
                 title="Register with us"
@@ -78,9 +86,6 @@ const styles = StyleSheet.create({
         margin: 2,
         marginRight: 17,
         marginLeft: 17,
-        //color: 'white',
-        //backgroundColor: colortheme.lightgrey,
-
     },
     container: {
         flex: 1,

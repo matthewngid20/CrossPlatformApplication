@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, Image, View, StyleSheet } from 'react-native'
+import {  Image, View, StyleSheet } from 'react-native'
 import Subtitle from './Subtitle'
 import Title from './Title'
 import { TouchableWithoutFeedback } from 'react-native'
 export const BlockCard = ({ style, imageStyle, item, onPress }) => {
 
     const { thumbnail, title, desc } = item
+    
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={[styles.container, style]}>

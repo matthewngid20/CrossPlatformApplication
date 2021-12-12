@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         paddingLeft: 15,
-        marginTop: 50,
         borderRadius: 15
     },
     searchText: {
